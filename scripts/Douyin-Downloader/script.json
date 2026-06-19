@@ -1,0 +1,45 @@
+{
+  "runInApp" : true,
+  "localizedNames" : {
+    "ja" : "抖音ダウンローダー",
+    "de" : "",
+    "zh" : "抖音下载器",
+    "pt" : "",
+    "en" : "Douyin Downloader",
+    "fr" : "",
+    "it" : "",
+    "es" : "",
+    "ru" : ""
+  },
+  "color" : "rgba(124, 76, 179,1)",
+  "entry" : "index.tsx",
+  "contributors" : [
+
+  ],
+  "name" : "Douyin-Downloader",
+  "iconImage" : null,
+  "icon" : "arrow.down.circle",
+  "description" : "抖音无水印视频下载器",
+  "permissions" : null,
+  "localizedDescriptions" : {
+    "es" : "",
+    "pt" : "",
+    "zh" : "从剪切板读取抖音分享链接，解析并下载无水印视频",
+    "it" : "",
+    "ru" : "",
+    "en" : "Download Douyin videos without watermark from clipboard share links",
+    "fr" : "",
+    "de" : "",
+    "ja" : "クリップボードから抖音の共有リンクを読み取り、透かしなし動画をダウンロード"
+  },
+  "intentInputTypes" : [
+    "text",
+    "urls"
+  ],
+  "author" : {
+    "name" : "nb5p",
+    "homepage" : "https://github.com/nb5p"
+  },
+  "remoteResource" : null,
+  "version" : "1.0.0"
+}
