@@ -1,0 +1,16 @@
+{
+  "name": "通用视频下载器",
+  "icon": "arrow.down.circle.fill",
+  "color": "#007AFF",
+  "version": "2.3.0",
+  "runInApp": true,
+  "description": "常用模式剪贴板直达、高级模式批量输入，支持实时进度、完成通知、Cookie 登录和高级媒体下载。",
+  "localizedNames": {
+    "zh": "通用视频下载器",
+    "en": "Universal Video Downloader"
+  },
+  "localizedDescriptions": {
+    "zh": "常用模式读取剪贴板直达解析，高级模式支持批量链接、实时进度、通知、高清合并、音频、字幕、缩略图、播放列表、时间范围和 Cookie 管理。",
+    "en": "Common and advanced download modes with batch links, live progress, notifications, formats, playlists, subtitles, thumbnails, time ranges, and cookie management."
+  }
+}
