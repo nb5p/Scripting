@@ -1,0 +1,33 @@
+{
+  "intentInputTypes" : [
+
+  ],
+  "version" : "2.0.0",
+  "remoteResource" : null,
+  "localizedDescriptions" : {
+    "ja" : "",
+    "ru" : "",
+    "es" : "",
+    "pt" : "",
+    "en" : "",
+    "it" : "",
+    "zh" : "标签打印（TSPL over BLE）",
+    "fr" : "",
+    "de" : ""
+  },
+  "permissions" : null,
+  "color" : "rgba(10, 132, 255, 1)",
+  "description" : "Label Printing TSPL over BLE.",
+  "runInApp" : false,
+  "contributors" : [
+
+  ],
+  "entry" : "index.tsx",
+  "iconImage" : "",
+  "name" : "Label Printer",
+  "icon" : "printer.fill",
+  "author" : null,
+  "localizedNames" : {
+    "zh" : "标签打印"
+  }
+}
