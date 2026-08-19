@@ -41,6 +41,7 @@ export function TextInputPage({
   const [mode, setMode] = useState<"adjust" | "direct">("direct")
   const [directPrinting, setDirectPrinting] = useState(false)
   const [directProgress, setDirectProgress] = useState(0)
+  const [directProgressTotal, setDirectProgressTotal] = useState(1)
   const [directStatus, setDirectStatus] = useState("")
   const [alertShow, setAlertShow] = useState(false)
   const [alertTitle, setAlertTitle] = useState("")
@@ -79,20 +80,24 @@ export function TextInputPage({
 
     setDirectPrinting(true)
     setDirectProgress(0)
+    setDirectProgressTotal(Math.ceil(lines.length / template.columns))
     setDirectStatus("准备打印…")
     const updateStatus = (message: string) => {
       setDirectStatus(message)
       appLog(`[直接打印] ${message}`)
     }
     const jobs = lines.map(line => ({ text: line, count: 1 }))
-    appLog(`开始直接打印：模板=${template.widthMm}×${template.heightMm}mm，PPI=${ppi}，共 ${jobs.length} 项`)
+    appLog(`开始直接打印：模板=${template.widthMm}×${template.heightMm}mm，${template.columns} 列，PPI=${ppi}，共 ${jobs.length} 项`)
     try {
       await printJobs(
         template,
         jobs,
         ppi,
         updateStatus,
-        completed => setDirectProgress(completed),
+        (completed, totalRows) => {
+          setDirectProgress(completed)
+          setDirectProgressTotal(totalRows)
+        },
       )
       appLog(`直接打印完成：共 ${jobs.length} 项`)
       setAlertTitle("打印完成")
@@ -156,9 +161,9 @@ export function TextInputPage({
             </Text>
             <ProgressView
               value={directProgress}
-              total={Math.max(1, lines.length)}
+              total={directProgressTotal}
               progressViewStyle="linear"
-              currentValueLabel={<Text>{directProgress}/{lines.length} 项</Text>}
+              currentValueLabel={<Text>{directProgress}/{directProgressTotal} 行</Text>}
             />
           </Card>
         ) : null}

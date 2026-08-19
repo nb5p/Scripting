@@ -43,6 +43,7 @@ export function QuantitiesPage({
   const [countTexts, setCountTexts] = useState<string[]>(lines.map(() => "1"))
   const [printing, setPrinting] = useState(false)
   const [printProgress, setPrintProgress] = useState(0)
+  const [printProgressTotal, setPrintProgressTotal] = useState(1)
   const [printStatus, setPrintStatus] = useState("")
   const [alertShow, setAlertShow] = useState(false)
   const [alertTitle, setAlertTitle] = useState("")
@@ -83,6 +84,7 @@ export function QuantitiesPage({
 
     setPrinting(true)
     setPrintProgress(0)
+    setPrintProgressTotal(Math.ceil(total / template.columns))
     setPrintStatus("准备打印…")
     const updateStatus = (message: string) => {
       setPrintStatus(message)
@@ -92,14 +94,17 @@ export function QuantitiesPage({
       text: line,
       count: parsePositiveCount(countTexts[index] ?? "1"),
     }))
-    appLog(`开始数量打印：模板=${template.widthMm}×${template.heightMm}mm，PPI=${ppi}，${jobs.length} 项，共 ${total} 张`)
+    appLog(`开始数量打印：模板=${template.widthMm}×${template.heightMm}mm，${template.columns} 列，PPI=${ppi}，${jobs.length} 项，共 ${total} 张`)
     try {
       await printJobs(
         template,
         jobs,
         ppi,
         updateStatus,
-        completed => setPrintProgress(completed),
+        (completed, totalRows) => {
+          setPrintProgress(completed)
+          setPrintProgressTotal(totalRows)
+        },
       )
       appLog(`数量打印完成：${jobs.length} 项，共 ${total} 张`)
       setAlertTitle("打印完成")
@@ -159,9 +164,9 @@ export function QuantitiesPage({
             </Text>
             <ProgressView
               value={printProgress}
-              total={Math.max(1, lines.length)}
+              total={printProgressTotal}
               progressViewStyle="linear"
-              currentValueLabel={<Text>{printProgress}/{lines.length} 项</Text>}
+              currentValueLabel={<Text>{printProgress}/{printProgressTotal} 行</Text>}
             />
           </Card>
         ) : null}

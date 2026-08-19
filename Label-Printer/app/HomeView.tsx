@@ -128,7 +128,7 @@ export function HomeView() {
     const next = { ...state, templates: [...state.templates, template] }
     setState(next)
     saveState(next)
-    addLog(`已创建模板 ${template.widthMm}×${template.heightMm}mm`)
+    addLog(`已创建模板 ${template.widthMm}×${template.heightMm}mm，${template.columns} 列`)
     path.setValue([])
   }
 
@@ -288,7 +288,7 @@ export function HomeView() {
                 buttonStyle="borderless"
                 frame={{ maxWidth: "infinity" }}
                 action={() => {
-                  addLog(`打开模板 ${template.widthMm}×${template.heightMm}mm`)
+                  addLog(`打开模板 ${template.widthMm}×${template.heightMm}mm，${template.columns} 列`)
                   path.setValue([`tpl:${template.id}`])
                 }}
               >
@@ -309,7 +309,7 @@ export function HomeView() {
                       {template.widthMm}×{template.heightMm}mm
                     </Text>
                     <Text font="footnote" foregroundStyle={COLORS.muted}>
-                      间距 {template.gapMm}mm · {template.shape === "circle" ? "圆形" : "方形"}
+                      间距 {template.gapMm}mm · {template.columns} 列 · {template.shape === "circle" ? "圆形" : "方形"}
                     </Text>
                   </VStack>
                   <Spacer />

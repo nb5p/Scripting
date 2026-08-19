@@ -10,12 +10,20 @@ function dataFilePath(): string {
   return FileManager.documentsDirectory + "/label_print_data.json"
 }
 
+function normalizeTemplates(value: unknown): PersistedState["templates"] {
+  if (!Array.isArray(value)) return []
+  return value.map(template => ({
+    ...template,
+    columns: template?.columns === 2 ? 2 : 1,
+  }))
+}
+
 export function loadState(): PersistedState {
   try {
     if (FileManager.existsSync(dataFilePath())) {
       const value = JSON.parse(FileManager.readAsStringSync(dataFilePath(), "utf8"))
       return {
-        templates: Array.isArray(value.templates) ? value.templates : [],
+        templates: normalizeTemplates(value.templates),
         settings: { ...DEFAULT_STATE.settings, ...(value.settings ?? {}) },
         knownPrinters: Array.isArray(value.knownPrinters) ? value.knownPrinters : [],
       }

@@ -3,6 +3,7 @@ export interface LabelTemplate {
   widthMm: number
   heightMm: number
   gapMm: number
+  columns: 1 | 2
   shape: "square" | "circle"
   createdAt: number
 }

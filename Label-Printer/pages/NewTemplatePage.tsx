@@ -24,6 +24,7 @@ export function NewTemplatePage({ onSave }: NewTemplatePageProps) {
   const [widthText, setWidthText] = useState("40")
   const [heightText, setHeightText] = useState("30")
   const [gapText, setGapText] = useState("1")
+  const [columns, setColumns] = useState<1 | 2>(1)
   const [shape, setShape] = useState<"square" | "circle">("square")
   const [error, setError] = useState("")
 
@@ -34,6 +35,7 @@ export function NewTemplatePage({ onSave }: NewTemplatePageProps) {
     widthMm: widthMm > 0 ? widthMm : 40,
     heightMm: heightMm > 0 ? heightMm : 30,
     gapMm: parseFloat(gapText) || 0,
+    columns,
     shape,
     createdAt: 0,
   }
@@ -54,6 +56,7 @@ export function NewTemplatePage({ onSave }: NewTemplatePageProps) {
       widthMm,
       heightMm,
       gapMm: parseFloat(gapText),
+      columns,
       shape,
       createdAt: now,
     })
@@ -118,6 +121,18 @@ export function NewTemplatePage({ onSave }: NewTemplatePageProps) {
               />
             </HStack>
           </HStack>
+        </Card>
+
+        <Card title="列数">
+          <Picker
+            value={String(columns)}
+            onChanged={(value: string) => setColumns(value === "2" ? 2 : 1)}
+            pickerStyle="segmented"
+            title="列数"
+          >
+            <Text tag="1">1 列</Text>
+            <Text tag="2">2 列</Text>
+          </Picker>
         </Card>
 
         <Card title="形状">
